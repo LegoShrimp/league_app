@@ -2,12 +2,13 @@ drop table if exists champions;
 drop table if exists game;
 drop table if exists champ_game
 create table champions ( 
-	id integer primary key,
+	id integer,
     role text,
 	name text,
 	win integer,
 	loss integer,
-    total integer
+    total integer,
+    PRIMARY KEY(id, role)
 
 );
 create table champ_game (

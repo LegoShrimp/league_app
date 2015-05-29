@@ -4,9 +4,9 @@ def get_teams(match):
         t2 = []
         for participant in match['participants']:
             if participant['teamId']== 100:
-                t1.append(participant['championId'])
+                t1.append(participant['participantId'])
             else:
-                t2.append(participant['championId'])
+                t2.append(participant['participantId'])
 
 
         return (t1,t2)

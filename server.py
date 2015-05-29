@@ -60,7 +60,7 @@ def index():
 
 @app.route('/user/<username>')
 def profile(username): pass
-class champion_info:
+class player_info:
     #needs to have:
     #Champion name
     #Champion role
@@ -71,6 +71,7 @@ class champion_info:
     lane = 'mid/bot/top/jungle'
     damage = 'ap/ad/hybrid'
     role = 'damage/zero_cs/tank/bruiser(damage+tank)/dmg_zero_cs'#super reduced to start with
+    rank = 'bronze-challenger'
 
 
 
@@ -85,7 +86,17 @@ class game_info:
     blue_comp = COMP_UNKNOWN
     red_comnp = COMP_UNKNOWN
     rank = "unknown"#rank will be some average of players rank in the game
+
+def process_player(match, player):
+    stats = match['participants'][player]['stats']
+    print stats['kills']
+
+
 def process_team(match, team):
+    #classify each player then do stuff with it
+    players = {}
+    players[0] = process_player(match, team[0])
+     
     do='stuff'
 def proccess_game(match, t1, t2):
     do='stuff'
@@ -104,14 +115,15 @@ def process_seed_data(matches):
         teams= m.get_teams(match) 
         t1=teams[0]
         t2=teams[1]
+        process_team(match, t1)
         print 'red team!'
         for i in t1:
             print i
-            print w.static_get_champion(i)['name']
+           # print w.static_get_champion(i)['name']
         print 'blue team!'
         for i in t2:
             print i
-            print w.static_get_champion(i)['name']
+           # print w.static_get_champion(i)['name']
 
 
 
