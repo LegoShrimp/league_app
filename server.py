@@ -2,6 +2,8 @@ from flask import Flask, url_for, render_template
 from riotwatcher import RiotWatcher
 import json
 import os
+import match_extractors
+m=match_extractors
 w = RiotWatcher('88a2054a-5234-4303-880d-b5d7028f7ca0')
 app = Flask(__name__)
 #will need functions for:
@@ -82,7 +84,9 @@ class game_info:
     win = -1
     blue_comp = COMP_UNKNOWN
     red_comnp = COMP_UNKNOWN
-
+    rank = "unknown"#rank will be some average of players rank in the game
+def process_team(match, team):
+    do='stuff'
 def proccess_game(match, t1, t2):
     do='stuff'
 
@@ -92,15 +96,19 @@ def process_seed_data(matches):
         #for each match print each champion in team and
         t1 = []
         t2 = []
-        for participant in match['participants']:
-            if participant['teamId']== 100:
-                t1.append(participant['championId'])
-            else:
-                t2.append(participant['championId'])
+       # for participant in match['participants']:
+       #     if participant['teamId']== 100:
+       #         t1.append(participant['championId'])
+       #     else:
+       #         t2.append(participant['championId'])
+        teams= m.get_teams(match) 
+        t1=teams[0]
+        t2=teams[1]
         print 'red team!'
         for i in t1:
             print i
             print w.static_get_champion(i)['name']
+        print 'blue team!'
         for i in t2:
             print i
             print w.static_get_champion(i)['name']
